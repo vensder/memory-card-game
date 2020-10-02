@@ -3,12 +3,12 @@
 To run game install Python 3 and PyGame.
 
 See: 
-https://www.python.org
-https://www.pygame.org
+* https://www.python.org
+* https://www.pygame.org
 
 
 Images sources: 
-https://creazilla.com
+* https://creazilla.com
 
 Sounds sources:
-https://freesound.org
+* https://freesound.org
