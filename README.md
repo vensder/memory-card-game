@@ -13,8 +13,8 @@ Images sources:
 Sounds sources:
 * https://freesound.org
 
-Images edited using Gimp:
+The images edited using Gimp:
 * https://www.gimp.org
 
-Sounds edited and converted using Audacity:
+The sounds edited and converted using Audacity:
 * https://www.audacityteam.org
