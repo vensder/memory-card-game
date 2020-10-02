@@ -13,8 +13,8 @@ SCREEN_Y_SIZE = CARD_Y_SIZE * DIM_Y
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-colors_list = [x for x in range((DIM_X * DIM_Y) // 2)] * 2
-random.shuffle(colors_list)
+colors_indices_list = [x for x in range((DIM_X * DIM_Y) // 2)] * 2
+random.shuffle(colors_indices_list)
 
 colors = []  # List of random colors
 cards = []  # List of Card objects
@@ -22,9 +22,19 @@ previous_card = None  # Store previous Card instance
 opened_cards = 0
 is_winner = False
 
-for i in range((DIM_X * DIM_Y) // 2):
-    rand_0_255 = lambda: random.randint(5, 25) * 10
-    colors.append((rand_0_255(), rand_0_255(), rand_0_255()))
+# TODO: Add levels using colors range for color hint
+# TODO: Add scores for minimal clicks and time
+
+
+def fill_random_colors(n):
+    lst = []
+    for i in range(n):
+        rand_0_255 = lambda: random.randint(5, 25) * 10
+        lst.append((rand_0_255(), rand_0_255(), rand_0_255()))
+    return lst
+
+
+colors = fill_random_colors((DIM_X * DIM_Y) // 2)
 
 
 class BaseCard:
@@ -74,12 +84,14 @@ screen = pygame.display.set_mode(
 pygame.display.set_caption("Memory Card Game")
 screen.fill(WHITE)
 
-image = pygame.image.load(r'pic/color-balloons-clipart-crop.png')
+image = pygame.image.load(r"pic/color-balloons-clipart-crop.png")
 image_rect = image.get_rect()
-image_rect.center = (SCREEN_X_SIZE//2, SCREEN_Y_SIZE//2)
+image_rect.center = (SCREEN_X_SIZE // 2, SCREEN_Y_SIZE // 2)
 
-applause = pygame.mixer.Sound(r'sound/applause.wav')
-tada = pygame.mixer.Sound(r'sound/tada.wav')
+applause_sound = pygame.mixer.Sound(r"sound/applause.ogg")
+tada_sound = pygame.mixer.Sound(r"sound/tada.ogg")
+click_sound = pygame.mixer.Sound(r"sound/click.ogg")
+right_sound = pygame.mixer.Sound(r"sound/right.ogg")
 
 clock = pygame.time.Clock()
 
@@ -88,11 +100,11 @@ for x in range(DIM_X):
         cards.append(
             ColorCard(
                 screen,
-                colors[colors_list[x * DIM_Y + y]],
+                colors[colors_indices_list[x * DIM_Y + y]],
                 (x, y),
                 CARD_X_SIZE,
                 CARD_Y_SIZE,
-                colors_list[x * DIM_Y + y],
+                colors_indices_list[x * DIM_Y + y],
             )
         )
 
@@ -101,9 +113,12 @@ for card in cards:
 
 while 1:
     for event in pygame.event.get():
-        if not is_winner and (event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP):
+        if not is_winner and (
+            event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP
+        ):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos_down = pygame.mouse.get_pos()
+                click_sound.play()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos_up = pygame.mouse.get_pos()
             for card in cards:
@@ -119,6 +134,7 @@ while 1:
                         ):
                             card.show_color_index()
                             previous_card.show_color_index()
+                            right_sound.play()
                             if (
                                 card.hide_color_index_after_click
                                 and previous_card.hide_color_index_after_click
@@ -127,16 +143,29 @@ while 1:
                             previous_card.hide_color_index_after_click = False
                             card.hide_color_index_after_click = False
                             if opened_cards >= DIM_X * DIM_Y:
-                                print('win!')
                                 is_winner = True
                                 screen.fill(WHITE)
                                 screen.blit(image, image_rect)
-                                tada.play()
-                                applause.play()
+                                tada_sound.play()
+                                applause_sound.play()
                         else:
                             if card.hide_color_index_after_click:
                                 card.hide_color_index()
                         previous_card = card
+
+        elif is_winner and event.type == pygame.MOUSEBUTTONUP:
+            screen.fill(WHITE)
+            click_sound.play()
+            colors = fill_random_colors((DIM_X * DIM_Y) // 2)
+            random.shuffle(colors_indices_list)
+            previous_card = None  # Store previous Card instance
+            opened_cards = 0
+            is_winner = False
+            for i, card in enumerate(cards):
+                card.hide_color_index_after_click = True
+                card.color = colors[colors_indices_list[i]]
+                card.color_index = colors_indices_list[i]
+                card.draw_card()
 
         if event.type == pygame.QUIT:
             pygame.display.quit()
