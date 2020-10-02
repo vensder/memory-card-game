@@ -12,3 +12,9 @@ Images sources:
 
 Sounds sources:
 * https://freesound.org
+
+Images edited using Gimp:
+* https://www.gimp.org
+
+Sounds edited and converted using Audacity:
+* https://www.audacityteam.org
