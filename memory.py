@@ -17,24 +17,25 @@ colors_indices_list = [x for x in range((DIM_X * DIM_Y) // 2)] * 2
 random.shuffle(colors_indices_list)
 
 colors = []  # List of random colors
+level_colors_ranges = [(5, 25), (7, 23), (10, 20), (12, 17), (15, 15)]
+current_level = 0
 cards = []  # List of Card objects
 previous_card = None  # Store previous Card instance
 opened_cards = 0
 is_winner = False
 
-# TODO: Add levels using colors range for color hint
 # TODO: Add scores for minimal clicks and time
 
 
-def fill_random_colors(n):
+def fill_random_colors(n, color_range):
     lst = []
     for i in range(n):
-        rand_0_255 = lambda: random.randint(5, 25) * 10
+        rand_0_255 = lambda: random.randint(color_range[0], color_range[1]) * 10
         lst.append((rand_0_255(), rand_0_255(), rand_0_255()))
     return lst
 
 
-colors = fill_random_colors((DIM_X * DIM_Y) // 2)
+colors = fill_random_colors((DIM_X * DIM_Y) // 2, level_colors_ranges[current_level])
 
 
 class BaseCard:
@@ -156,7 +157,13 @@ while 1:
         elif is_winner and event.type == pygame.MOUSEBUTTONUP:
             screen.fill(WHITE)
             click_sound.play()
-            colors = fill_random_colors((DIM_X * DIM_Y) // 2)
+            if current_level < len(level_colors_ranges) - 1:
+                current_level += 1
+            else:
+                current_level = 0
+            colors = fill_random_colors(
+                (DIM_X * DIM_Y) // 2, level_colors_ranges[current_level]
+            )
             random.shuffle(colors_indices_list)
             previous_card = None  # Store previous Card instance
             opened_cards = 0
