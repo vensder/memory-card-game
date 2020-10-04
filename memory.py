@@ -3,6 +3,7 @@
 import pygame
 import sys
 import random
+import string
 
 DIM_X = 4
 DIM_Y = 3
@@ -16,6 +17,9 @@ BLACK = (0, 0, 0)
 colors_indices_list = [x for x in range((DIM_X * DIM_Y) // 2)] * 2
 random.shuffle(colors_indices_list)
 
+letters_list = list(string.ascii_uppercase)
+random.shuffle(letters_list)
+
 colors = []  # List of random colors
 level_colors_ranges = [(5, 25), (7, 23), (10, 20), (12, 17), (15, 15)]
 current_level = 0
@@ -23,6 +27,7 @@ cards = []  # List of Card objects
 previous_card = None  # Store previous Card instance
 opened_cards = 0
 is_winner = False
+is_letters = False  # Use letters instead of numbers on the cards
 
 # TODO: Add scores for minimal clicks and time
 
@@ -96,8 +101,13 @@ right_sound = pygame.mixer.Sound(r"sound/right.ogg")
 
 clock = pygame.time.Clock()
 
+
 for x in range(DIM_X):
     for y in range(DIM_Y):
+        if is_letters:
+            color_index = letters_list[colors_indices_list[x * DIM_Y + y]]
+        else:
+            color_index = colors_indices_list[x * DIM_Y + y]
         cards.append(
             ColorCard(
                 screen,
@@ -105,7 +115,7 @@ for x in range(DIM_X):
                 (x, y),
                 CARD_X_SIZE,
                 CARD_Y_SIZE,
-                colors_indices_list[x * DIM_Y + y],
+                color_index,
             )
         )
 
@@ -161,17 +171,22 @@ while 1:
                 current_level += 1
             else:
                 current_level = 0
+                is_letters = not is_letters
             colors = fill_random_colors(
                 (DIM_X * DIM_Y) // 2, level_colors_ranges[current_level]
             )
             random.shuffle(colors_indices_list)
+            random.shuffle(letters_list)
             previous_card = None  # Store previous Card instance
             opened_cards = 0
             is_winner = False
             for i, card in enumerate(cards):
                 card.hide_color_index_after_click = True
                 card.color = colors[colors_indices_list[i]]
-                card.color_index = colors_indices_list[i]
+                if is_letters:
+                    card.color_index = letters_list[colors_indices_list[i]]
+                else:
+                    card.color_index = colors_indices_list[i]
                 card.draw_card()
 
         if event.type == pygame.QUIT:
