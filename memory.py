@@ -44,8 +44,7 @@ colors = fill_random_colors((DIM_X * DIM_Y) // 2, level_colors_ranges[current_le
 
 
 class BaseCard:
-    def __init__(self, screen, color, left_top_coord, x_size, y_size):
-        self.color = color
+    def __init__(self, screen, left_top_coord, x_size, y_size):
         self.left_top_coord = left_top_coord
         self.x_size = x_size
         self.y_size = y_size
@@ -59,7 +58,8 @@ class BaseCard:
 
 class ColorCard(BaseCard):
     def __init__(self, screen, color, left_top_coord, x_size, y_size, color_index):
-        super().__init__(screen, color, left_top_coord, x_size, y_size)
+        super().__init__(screen, left_top_coord, x_size, y_size)
+        self.color = color
         self.font = pygame.font.Font("fonts/LiberationMono-Bold.ttf", y_size)
         self.color_index = color_index
         self.hide_color_index_after_click = True
