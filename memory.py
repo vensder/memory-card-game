@@ -94,10 +94,18 @@ image = pygame.image.load(r"pic/color-balloons-clipart-crop.png")
 image_rect = image.get_rect()
 image_rect.center = (SCREEN_X_SIZE // 2, SCREEN_Y_SIZE // 2)
 
-applause_sound = pygame.mixer.Sound(r"sound/applause.ogg")
-tada_sound = pygame.mixer.Sound(r"sound/tada.ogg")
-click_sound = pygame.mixer.Sound(r"sound/click.ogg")
+children_hooray_sound = pygame.mixer.Sound(r"sound/children_hooray.ogg")
 right_sound = pygame.mixer.Sound(r"sound/right.ogg")
+
+sound_samples_num = []
+for num in range(10):
+    sample = pygame.mixer.Sound(f"sound/synth/{num}.ogg")
+    sound_samples_num.append(sample)
+
+sound_samples_letters = dict()
+for letter in list(string.ascii_uppercase):
+    sample = pygame.mixer.Sound(f"sound/synth/{letter}.ogg")
+    sound_samples_letters[letter] =  sample
 
 clock = pygame.time.Clock()
 
@@ -129,13 +137,17 @@ while 1:
         ):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos_down = pygame.mouse.get_pos()
-                click_sound.play()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos_up = pygame.mouse.get_pos()
             for card in cards:
                 if card.card_rect.collidepoint(pos_down):
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         card.show_color_index()
+                        if is_letters:
+                            sound_samples_letters[card.color_index].play()
+                        else:
+                            sound_samples_num[card.color_index].play()
+                        
                     if event.type == pygame.MOUSEBUTTONUP:
                         if (
                             isinstance(previous_card, BaseCard)
@@ -157,8 +169,7 @@ while 1:
                                 is_winner = True
                                 screen.fill(WHITE)
                                 screen.blit(image, image_rect)
-                                tada_sound.play()
-                                applause_sound.play()
+                                children_hooray_sound.play()
                         else:
                             if card.hide_color_index_after_click:
                                 card.hide_color_index()
@@ -166,7 +177,6 @@ while 1:
 
         elif is_winner and event.type == pygame.MOUSEBUTTONUP:
             screen.fill(WHITE)
-            click_sound.play()
             if current_level < len(level_colors_ranges) - 1:
                 current_level += 1
             else:
