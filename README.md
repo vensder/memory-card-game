@@ -1,9 +1,8 @@
 # Simple PyGame Memory Card Game with sound effects
 
-This is a simple cross-platform Memory Card game for children, created using PyGame framework.
-The game has multiple levels in the loop.
-On the first level, there are colour hints on the back of cards helping to find the same numbers or letters.
+This is a simple cross-platform Memory Card game for children even under 3 years, created with PyGame framework. The game has multiple levels in the loop. On the first levels, there are colour hints on the back of cards helping to find the same numbers or letters.
 On the next levels, the colour range is decreasing up to one colour.
+The game can help to recognise colours and learn numbers and letters.
 
 To run game install Python 3 and PyGame.
 

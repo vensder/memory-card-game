@@ -97,18 +97,13 @@ image_rect.center = (SCREEN_X_SIZE // 2, SCREEN_Y_SIZE // 2)
 children_hooray_sound = pygame.mixer.Sound(r"sound/children_hooray.ogg")
 right_sound = pygame.mixer.Sound(r"sound/right.ogg")
 
-sound_samples_num = []
-for num in range(10):
-    sample = pygame.mixer.Sound(f"sound/synth/{num}.ogg")
-    sound_samples_num.append(sample)
-
-sound_samples_letters = dict()
-for letter in list(string.ascii_uppercase):
-    sample = pygame.mixer.Sound(f"sound/synth/{letter}.ogg")
-    sound_samples_letters[letter] =  sample
+sound_samples_num = [pygame.mixer.Sound(f"sound/synth/{num}.ogg") for num in range(10)]
+sound_samples_letters = {
+    letter: pygame.mixer.Sound(f"sound/synth/{letter}.ogg")
+    for letter in list(string.ascii_uppercase)
+}
 
 clock = pygame.time.Clock()
-
 
 for x in range(DIM_X):
     for y in range(DIM_Y):
@@ -147,7 +142,7 @@ while 1:
                             sound_samples_letters[card.color_index].play()
                         else:
                             sound_samples_num[card.color_index].play()
-                        
+
                     if event.type == pygame.MOUSEBUTTONUP:
                         if (
                             isinstance(previous_card, BaseCard)
