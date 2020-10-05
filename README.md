@@ -20,12 +20,6 @@ Some screenshots:
 ![Screenshot2](./screenshots/04.png?raw=true)
 
 
-![Screenshot3](./screenshots/02.png?raw=true)
-
-
-![Screenshot4](./screenshots/03.png?raw=true)
-
-
 ![Screenshot5](./screenshots/05.png?raw=true)
 
 
