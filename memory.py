@@ -4,6 +4,7 @@ import pygame
 import sys
 import random
 import string
+import os.path
 
 DIM_X = 4
 DIM_Y = 3
@@ -60,7 +61,7 @@ class ColorCard(BaseCard):
     def __init__(self, screen, color, left_top_coord, x_size, y_size, color_index):
         super().__init__(screen, left_top_coord, x_size, y_size)
         self.color = color
-        self.font = pygame.font.Font("fonts/LiberationMono-Bold.ttf", y_size)
+        self.font = pygame.font.Font(os.path.join("fonts", "LiberationMono-Bold.ttf"), y_size)
         self.color_index = color_index
         self.hide_color_index_after_click = True
 
@@ -90,16 +91,16 @@ screen = pygame.display.set_mode(
 pygame.display.set_caption("Memory Card Game")
 screen.fill(WHITE)
 
-image = pygame.image.load(r"pic/color-balloons-clipart-crop.png")
+image = pygame.image.load(os.path.join("pic", "color-balloons-clipart-crop.png"))
 image_rect = image.get_rect()
 image_rect.center = (SCREEN_X_SIZE // 2, SCREEN_Y_SIZE // 2)
 
-children_hooray_sound = pygame.mixer.Sound(r"sound/children_hooray.ogg")
-right_sound = pygame.mixer.Sound(r"sound/right.ogg")
+children_hooray_sound = pygame.mixer.Sound(os.path.join("sound", "children_hooray.ogg"))
+right_sound = pygame.mixer.Sound(os.path.join("sound", "right.ogg"))
 
-sound_samples_num = [pygame.mixer.Sound(f"sound/synth/{num}.ogg") for num in range(10)]
+sound_samples_num = [pygame.mixer.Sound(os.path.join("sound", "synth", f"{num}.ogg")) for num in range(10)]
 sound_samples_letters = {
-    letter: pygame.mixer.Sound(f"sound/synth/{letter}.ogg")
+    letter: pygame.mixer.Sound(os.path.join("sound", "synth", f"{letter}.ogg"))
     for letter in list(string.ascii_uppercase)
 }
 
