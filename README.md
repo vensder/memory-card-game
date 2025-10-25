@@ -3,8 +3,6 @@
 A fun and educational **cross-platform Memory Card Game** built with **PyGame**, designed especially for young children (even under 3 years old).  
 The game features multiple levels, starting with colourful hints and progressing toward more challenging monochrome cards — helping children learn **colours, numbers, and letters** while improving memory and focus.
 
----
-
 ## 🎮 Game Features
 
 - Simple and child-friendly gameplay  
@@ -13,15 +11,11 @@ The game features multiple levels, starting with colourful hints and progressing
 - Clear and pleasant sound effects  
 - Works on Windows, macOS, and Linux
 
----
-
 ## 🧠 Learning Goals
 
 - Recognise and match **colours**  
 - Identify **numbers and letters**  
 - Develop **memory** and **concentration**
-
----
 
 ## ⚙️ Installation and Setup
 
