@@ -1,16 +1,52 @@
-# Simple PyGame Memory Card Game with sound effects
+# 🧩 Simple PyGame Memory Card Game (with Sound Effects)
 
-This is a simple cross-platform Memory Card game for children even under 3 years, created with PyGame framework. The game has multiple levels in the loop. On the first levels, there are colour hints on the back of cards helping to find the same numbers or letters.
-On the next levels, the colour range is decreasing up to one colour.
-The game can help to recognise colours and learn numbers and letters.
+A fun and educational **cross-platform Memory Card Game** built with **PyGame**, designed especially for young children (even under 3 years old).  
+The game features multiple levels, starting with colourful hints and progressing toward more challenging monochrome cards — helping children learn **colours, numbers, and letters** while improving memory and focus.
 
-To run game install Python 3 and PyGame.
+---
 
-See: 
-* https://www.python.org
-* https://www.pygame.org
+## 🎮 Game Features
 
-Some screenshots:
+- Simple and child-friendly gameplay  
+- Progressive difficulty levels  
+- Colour-coded hints on early levels  
+- Clear and pleasant sound effects  
+- Works on Windows, macOS, and Linux
+
+---
+
+## 🧠 Learning Goals
+
+- Recognise and match **colours**  
+- Identify **numbers and letters**  
+- Develop **memory** and **concentration**
+
+---
+
+## ⚙️ Installation and Setup
+
+You’ll need **Python 3** and **PyGame** installed.
+
+- [Download Python](https://www.python.org/downloads/)
+- [Learn more about PyGame](https://www.pygame.org)
+
+It’s recommended to use a **Python virtual environment** to avoid installing dependencies system-wide:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+## ▶️ How to Run the Game
+
+Once dependencies are installed, simply run:
+
+```bash
+python memory.py
+```
+
+## Some screenshots:
 
 <p align="center">
   <img src="screenshots/01.png" alt="Memory game 1" width="48%">
