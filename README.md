@@ -24,7 +24,19 @@ You’ll need **Python 3** and **PyGame** installed.
 - [Download Python](https://www.python.org/downloads/)
 - [Learn more about PyGame](https://www.pygame.org)
 
-It’s recommended to use a **Python virtual environment** to avoid installing dependencies system-wide:
+🧩 Option 1: Quick Install (Recommended for most users)
+
+You can install PyGame directly using pip:
+
+```sh
+python3 -m pip install -U pygame==2.6.0
+```
+
+Then simply run the game (see below).
+
+🧱 Option 2: Using a Virtual Environment (Recommended for developers)
+
+To keep your system Python clean and isolate dependencies, create and activate a virtual environment:
 
 ```bash
 python3 -m venv venv
