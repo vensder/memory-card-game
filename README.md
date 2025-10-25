@@ -12,18 +12,15 @@ See:
 
 Some screenshots:
 
+<p align="center">
+  <img src="screenshots/01.png" alt="Memory game 1" width="48%">
+  <img src="screenshots/04.png" alt="Memory game 2" width="48%">
+</p>
 
-![Screenshot1](./screenshots/01.png?raw=true)
-
-
-![Screenshot2](./screenshots/04.png?raw=true)
-
-
-![Screenshot5](./screenshots/05.png?raw=true)
-
-
-![Screenshot6](./screenshots/06.png?raw=true)
-
+<p align="center">
+  <img src="screenshots/05.png" alt="Memory game 3" width="48%">
+  <img src="screenshots/06.png" alt="Memory game 4" width="48%">
+</p>
 
 Images sources: 
 * https://creazilla.com
